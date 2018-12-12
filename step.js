@@ -7,12 +7,16 @@ console.log(out);
 function test() {
     var step = 0;
     setInterval(() => {
-	var pinVals = [];
-	
-        console.log(`Step: ${step}, pins: ${out.map(x => x.readSync())}`);
-        out[step%4].writeSync(1);
-        out[(step + 1)%4].writeSync(0);
-	step++;
+    	var pinVals = [];
+        out[step % 4].writeSync(1);
+        out[(step + 1) % 4].writeSync(0);
+    	console.log(`Step: ${step}, pins: ${out.map(x => x.readSync())}`);
+    	step++;
     }, 5)
 }
-test();
+// test();
+var test = new io(5, "out");
+console.log(test.writeSync(1));
+console.log(test.readSync());
+console.log(test.writeSync(0));
+console.log(test.readSync());
