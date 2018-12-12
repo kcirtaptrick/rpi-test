@@ -1,5 +1,5 @@
 const io = require("onoff").Gpio;
-const led = new io(19, 'out');
+const led = new io(21, 'out');
 console.log("Start");
 console.log(led);
 var i = 0;
