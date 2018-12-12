@@ -12,11 +12,6 @@ function test() {
         out[(step + 1) % 4].writeSync(0);
     	console.log(`Step: ${step}, pins: ${out.map(x => x.readSync())}`);
     	step++;
-    }, 5)
+    }, 20)
 }
-// test();
-var test = new io(5, "out");
-console.log(test.writeSync(1));
-console.log(test.readSync());
-console.log(test.writeSync(0));
-console.log(test.readSync());
+test();
