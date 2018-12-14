@@ -21,17 +21,19 @@ function testGPIO(min = 2, max = 26/*, options = {}*/) {
         pins: []
     }
     printObj(out)
-    for(let i = min; i <= max; i++) {
+    for(let i = 0, pin = min; pin <= max; pin++) {
         out.pins.push({
-            number: i,
-            pin: new io(i, 'out'),
+            number: pin,
+            pin: new io(pin, 'out'),
             test: []
         });
         printObj(out);
+        
         out.pins[i].pin.writeSync(0);
         out.pins[i].test.push({write: 0, read: out.pins[i].pin.readSync()});
         out.pins[i].pin.writeSync(1);
         out.pins[i].test.push({write: 1, read: out.pins[i].pin.readSync()});
+        i++;
     }
     return out;
 }
