@@ -27,16 +27,15 @@ function testGPIO(min = 2, max = 26 /*, options = {}*/ ) {
             pin: new io(pin, 'out'),
             test: []
         });
-
-        out.pins[i].pin.writeSync(0);
-        out.pins[i].test.push({ write: 0, read: out.pins[i].pin.readSync() });
         out.pins[i].pin.writeSync(1);
         out.pins[i].test.push({ write: 1, read: out.pins[i].pin.readSync() });
+        out.pins[i].pin.writeSync(0);
+        out.pins[i].test.push({ write: 0, read: out.pins[i].pin.readSync() });
         i++;
     }
-    for(let pin of out.pins) {
-        console.log(`pin: ${pin.number}, read: ${pin.pin.readSync()}`);
-    }
+    // for(let pin of out.pins) {
+    //     console.log(`pin: ${pin.number}, read: ${pin.pin.readSync()}`);
+    // }
     return out;
 }
 
