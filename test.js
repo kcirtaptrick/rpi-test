@@ -19,14 +19,15 @@ function waiting(num = 3, speed = 300) {
 function testGPIO(min = 2, max = 26/*, options = {}*/) {
     var out = {
         pins: []
-        
     }
+    console.log(out)
     for(let i = min; i <= max; i++) {
         out.pins.push({
             number: i,
             pin: new io(i, 'out'),
             test: []
         });
+        console.log(out);
         out.pins[i].pin.writeSync(0);
         out.pins[i].test.push({write: 0, read: out.pins[i].pin.readSync()});
         out.pins[i].pin.writeSync(1);
