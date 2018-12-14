@@ -1,14 +1,8 @@
 const io = require("onoff").Gpio;
-var out = {
-    pins: [6, 13, 19, 26],
-    '0': new io(2, 'out'),
-    //'1': new io(13, 'out'),
-    //'2': new io(19, 'out'),
-    //'3': new io(26, 'out')
+var out = [6, 13, 19, 26]
+for(let i in out) {
+    out[i] = new io(out.pins[i], "out");
 }
-//for(let i in out.pins) {
-//    out[i + ''] = new io(out.pins[i], "out");
-//}
 //console.log(out);
 var step = 0
 //        out[step % 4 + ''].writeSync(1);

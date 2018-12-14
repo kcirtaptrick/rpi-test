@@ -5,35 +5,8 @@ const motor = new pio(10, { mode: pio.OUTPUT });
 
 
 console.log("Start");
-input.watch((err, val) => {
-    if (err) {
-        console.log(`Error: ${err}`);
-        return;
-    }
-    // console.log("Update");
-    // console.log(val);
-});
-
-console.log(require('pigpio'));
-
 waiting();
-servo(motor)
-function servo(motor, pos, speed) {
-    let pulseWidth = 1000;
-    let increment = 100;
 
-    setInterval(() => {
-        motor.servoWrite(pulseWidth);
-
-        pulseWidth += increment;
-        if (pulseWidth >= 2000) {
-            increment = -100;
-        }
-        else if (pulseWidth <= 1000) {
-            increment = 100;
-        }
-    }, 1000);
-}
 
 function waiting(num = 3, speed = 300) {
     var i = 0;
@@ -45,3 +18,22 @@ function waiting(num = 3, speed = 300) {
         process.stdout.write("Waiting" + dots); // write text
     }, speed);
 }
+function testGPIO(min = 2, max = 26/*, options = {}*/) {
+    var out = {
+        pins: [],
+        
+    }
+    for(let i = min; i <= max; i++) {
+        out.pins.push({
+            number: i,
+            pin: new io(i, 'out'),
+            test: []
+        });
+        out.pins[i].pin.writeSync(0);
+        out.pins[i].test.push({write: 0, read: out.pins[i].pin.readSync()});
+        out.pins[i].pin.writeSync(1);
+        out.pins[i].test.push({write: 1, read: out.pins[i].pin.readSync()});
+    }
+    return out;
+}
+console.log(JSON.stringify(testGPIO(), null, 4));
