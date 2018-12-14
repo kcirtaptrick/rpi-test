@@ -1,7 +1,5 @@
 var io = require('onoff').Gpio;
 var pio = require('pigpio').Gpio;
-var input = new io(4, 'both', 'in');
-const motor = new pio(10, { mode: pio.OUTPUT });
 
 
 console.log("Start");
@@ -26,13 +24,13 @@ function testGPIO(min = 2, max = 26/*, options = {}*/) {
     for(let i = min; i <= max; i++) {
         out.pins.push({
             number: i,
-            pin: new io(i, 'out'),
+            pin: new pio(i, {mode: pio.OUTPUT}),
             test: []
         });
-        out.pins[i].pin.writeSync(0);
-        out.pins[i].test.push({write: 0, read: out.pins[i].pin.readSync()});
-        out.pins[i].pin.writeSync(1);
-        out.pins[i].test.push({write: 1, read: out.pins[i].pin.readSync()});
+        out.pins[i].pin.digitalWrite(0);
+        out.pins[i].test.push({write: 0, read: out.pins[i].pin.digitalRead()});
+        out.pins[i].pin.digitalWrite(1);
+        out.pins[i].test.push({write: 1, read: out.pins[i].pin.digitalRead()});
     }
     return out;
 }
