@@ -1,0 +1,37 @@
+const io = require("onoff").Gpio;
+var out = [new io(6, 'out'), new io(13, 'out'), new io(19, 'out'), new io(26, 'out')];
+//var out = [6, 13, 19, 26];
+//for(let i in out) {
+  //  out[i] = new io(out[i], "out");
+//}
+console.log(out);
+var step = 0
+        out[step % 4].writeSync(1);
+        out[(step + 1) % 4].writeSync(0);
+console.log(out[step % 4].readSync() + " " + out[(step + 1) % 4].readSync())
+out[1].writeSync(0);
+console.log(out[1].readSync());
+//test();
+var test = new io(21, 'out');
+for(let i = 0; i < ) {
+    test.writeSync(i%2);
+    test.readSync();
+}
+function test() {
+    var step = 0;
+    console.log('');
+    setInterval(() => {
+	process.stdout.clearLine();
+        process.stdout.cursorTo(0);
+    	var pinVals = [];
+	for(let i of out) {
+	    pinVals.push(i.readSync());
+	}
+        out[step % 4].writeSync(1);
+        out[(step + 1) % 4].writeSync(0);
+	console.log(out[(step+1)%4].readSync());
+    	process.stdout.write(`Step: ${step}, pins: ${pinVals}`);
+    	step++;
+    }, 1)
+}
+
