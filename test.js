@@ -18,7 +18,7 @@ function waiting(num = 3, speed = 300) {
 }
 function testGPIO(min = 2, max = 26/*, options = {}*/) {
     var out = {
-        pins: [],
+        pins: []
         
     }
     for(let i = min; i <= max; i++) {
