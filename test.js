@@ -20,14 +20,14 @@ function testGPIO(min = 2, max = 26/*, options = {}*/) {
     var out = {
         pins: []
     }
-    console.log(out)
+    printObj(out)
     for(let i = min; i <= max; i++) {
         out.pins.push({
             number: i,
             pin: new io(i, 'out'),
             test: []
         });
-        console.log(out);
+        printObj(out);
         out.pins[i].pin.writeSync(0);
         out.pins[i].test.push({write: 0, read: out.pins[i].pin.readSync()});
         out.pins[i].pin.writeSync(1);
@@ -35,4 +35,7 @@ function testGPIO(min = 2, max = 26/*, options = {}*/) {
     }
     return out;
 }
-console.log(JSON.stringify(testGPIO(), null, 4));
+function printObj(obj) {
+    console.log(JSON.stringify(obj, null, 4))
+} 
+console.log(printObj(testGPIO()));
