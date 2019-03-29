@@ -1,0 +1,23 @@
+{
+  "name": "rpi-test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://kcirtaptrick@github.com/kcirtaptrick/rpi-test.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kcirtaptrick/rpi-test/issues"
+  },
+  "homepage": "https://github.com/kcirtaptrick/rpi-test#readme",
+  "dependencies": {
+    "lcd": "^2.0.5",
+    "pigpio": "^1.2.2"
+  }
+}
