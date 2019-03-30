@@ -1,6 +1,8 @@
 const gpio = require("pigpio").Gpio;
 var rgb = [new gpio(13, {mode: gpio.OUTPUT}), new gpio(5, {mode: gpio.OUTPUT}), new gpio(6, {mode: gpio.OUTPUT})];
-var strip = {}
+var strip = {
+  fns: {}
+}
 console.log("start");
 
 strip.reset = () => {
@@ -8,7 +10,7 @@ strip.reset = () => {
     rgb[i].digitalWrite(1);
   }
 }
-strip.strobe = (speed) => {
+strip.fns.strobe = (speed) => {
   var flag = false;
   return setInterval(() => {
     for(let i in rgb) {
@@ -31,7 +33,7 @@ strip.test = (speed) => {
     }
   }, 1000 / speed);
 }
-strip.pulse = (speed) => {
+strip.fns.pulse = (speed) => {
   var count = 0;
   return setInterval(() => {
     for(let i in rgb) {
@@ -40,14 +42,14 @@ strip.pulse = (speed) => {
     count++;
   }, 1000 / 255 / speed);
 }
-strip.pulseColors = (speed) => {
+strip.fns.pulseColors = (speed) => {
   var count = 0;
   return setInterval(() => {
     rgb[Math.floor((count /  510) % 3)].pwmWrite(Math.abs(count % 510 - 255))
     count++;
   }, 1000 / 255 / speed);
 }
-strip.slide = (speed) => {
+strip.fns.slide = (speed) => {
   var count = 0;
   return setInterval(() => {
     rgb[0].pwmWrite(Math.abs((count + 85) % 510 - 255));
@@ -57,15 +59,17 @@ strip.slide = (speed) => {
   }, 1000 / 255 / speed);
 }
 strip.auto = (speed) => {
-  var fns = Object.keys(strip)
+  var fns = Object.keys(strip.fns)
   var count = 0;
   var interval;
   return setInterval(() => {
+    console.log(`count: ${count}, interval: ${interval}`);
     count == 0 || clearInterval(interval);
-    var interval = strip[fns[count]](speed);
-  }, 3000 / speed);
+    interval = strip.fns[fns[count % fns.length]](speed);
+    count++
+  }, 12000 / speed);
 }
-    
+
 /*setInterval(() => {
   rgb[count % 3].digitalWrite(0);
   rgb[(count + 1) % 3].digitalWrite(1);
@@ -73,4 +77,4 @@ strip.auto = (speed) => {
   count++;
 }, 50);*/
 strip.reset();
-strip.auto(3);
+strip.auto(10);
