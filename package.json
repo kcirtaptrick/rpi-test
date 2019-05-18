@@ -17,7 +17,9 @@
   },
   "homepage": "https://github.com/kcirtaptrick/rpi-test#readme",
   "dependencies": {
+    "johnny-five": "^1.1.0",
     "lcd": "^2.0.5",
-    "pigpio": "^1.2.2"
+    "pigpio": "^1.2.2",
+    "raspi-io": "^10.0.2"
   }
 }
