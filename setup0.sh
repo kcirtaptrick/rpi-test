@@ -12,9 +12,9 @@ if which node > /dev/null
       cd /home/pi
       rm -rf node-v10.15.3-linux-armv6l*
   fi
-#sudo apt install pigpio
+sudo apt install pigpio
 cd $DIR
-#npm install
+npm install
 if [[ $@ =~ "git-config" ]]
   then
     git config --global user.email "patrick.bohan.wang@gmail.com"
