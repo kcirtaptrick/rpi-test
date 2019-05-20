@@ -13,3 +13,8 @@ if which node > /dev/null
 sudo apt install pigpio
 cd $DIR
 npm install
+if [[ $@ =~ "git-config" ]]
+  then
+    git config --global user.email "patrick.bohan.wang@gmail.com"
+    git config --global user.name "Patrick Wang"
+  fi
